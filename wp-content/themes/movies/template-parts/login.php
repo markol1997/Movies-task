@@ -18,6 +18,19 @@ get_header();
 </div>
 
 <script>
+    function checkTokenExpiration() {
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const [name, _] = cookie.trim().split('=');
+            if (name.trim() === 'token_key') {
+                window.location.href = 'http://localhost/movies';
+                return;
+            }
+        }
+    }
+
+    checkTokenExpiration();
+
     class LoginForm {
         constructor() {
             this.bindEvents();
@@ -51,6 +64,11 @@ get_header();
             var expiresAt = new Date();
             expiresAt.setTime(expiresAt.getTime() + (30 * 60 * 1000));
             document.cookie = `token_key=${response.token_key}; expires=${expiresAt.toUTCString()}; path=/`;
+            window.location.href = 'http://localhost/movies';
+
+            setTimeout(function() {
+                document.cookie = 'token_key=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            }, expiresAt.getTime() - Date.now());
         }
 
         handleError(xhr, status, error) {

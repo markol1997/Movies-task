@@ -19,17 +19,3 @@ function my_block_register_meta()
 }
 
 add_action('init', 'my_block_register_meta');
-
-
-function save_block($post_id) {
-
-	$nonce = $_POST['_favorite_movie_quotes_nonce'] ?? '';
-	if (!wp_verify_nonce($nonce, 'favorite_movie_quotes_nonce_action')) {
-		return;
-	}
-
-	if (isset($_POST['_favorite_movie_quotes'])) {
-		update_post_meta($post_id, '_favorite_movie_quotes', wp_kses_post($_POST['_favorite_movie_quotes']));
-	}
-}
-add_action('save_post', 'save_block', 10, 2);
