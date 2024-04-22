@@ -11,7 +11,3 @@ Advanced Task: Gutenberg Block Plugin - Favorite Movie Quote
 
 For the advanced task, a Gutenberg block plugin named "Favorite movie quote" was generated. The plugin folder is located at wp-content/plugins/favorite-movie-quote. The block is dynamic in nature.
 Getting Started
-
-Contributors
-
-    [markol1997]
